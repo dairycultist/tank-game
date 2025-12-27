@@ -24,12 +24,9 @@ size = Vector2(10, 10)
 
 [node name="Tank" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.2553415, 0)
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
 script = ExtResource("1_fj7yv")
-stiffness = 150.0
-dampening = 10.0
+stiffness = 30.0
+dampening = 2.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tank"]
 mesh = SubResource("BoxMesh_f3sb7")
@@ -43,6 +40,15 @@ shape = SubResource("BoxShape3D_fj7yv")
 
 [node name="RayCast3D" type="RayCast3D" parent="Tank"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.75)
+
+[node name="RayCast3D2" type="RayCast3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.75)
+
+[node name="RayCast3D3" type="RayCast3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.75)
+
+[node name="RayCast3D4" type="RayCast3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.75)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 

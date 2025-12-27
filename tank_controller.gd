@@ -2,18 +2,22 @@ extends RigidBody3D
 
 # basic movement is you're just a floating box; the wheels/legs/treads are completely visual
 
-
-
-
 @export_category("Suspension")
-## How much the suspension opposes being compressed.
+## How much the suspension forces oppose compression.
 @export var stiffness: float = 1500.0
-## How much vertical energy is diffused.
+## How much vertical velocity (at the point of suspension) is diffused.
 @export var dampening: float = 150.0
+
+var suspension_rays: Array[Node]
+
+func _ready() -> void:
+	
+	suspension_rays = find_children("*", "RayCast3D", false)
 
 func _process(_delta: float) -> void:
 	
-	_apply_suspension($RayCast3D)
+	for ray in suspension_rays:
+		_apply_suspension(ray)
 	
 func _apply_suspension(ray: RayCast3D):
 	
@@ -25,9 +29,10 @@ func _apply_suspension(ray: RayCast3D):
 		var up := global_basis.y
 		
 		var compression_distance := ((ray.target_position + ray.global_position) - ray.get_collision_point()).length()
+		var compression_fac := compression_distance / ray.target_position.length()
 		
 		# stiffness opposes compression
-		var suspension_force := compression_distance * stiffness
+		var suspension_force := compression_fac * stiffness
 		
 		# dampening opposes vertical velocity at the raycast's origin
 		var velocity_at_position := linear_velocity + angular_velocity.cross(ray.position)

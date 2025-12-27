@@ -1,6 +1,7 @@
 extends RigidBody3D
 
-# basic movement is you're just a floating box; the wheels/legs/treads are completely visual
+# TODO rotating camera rig that's always upright; turret attempts to face
+# towards camera direction
 
 @export_category("Control")
 @export var drag: float = 50.0
@@ -23,11 +24,14 @@ func _process(delta: float) -> void:
 	
 	var grounded := false
 	
+	# apply "suspension" which allows the tank to float above the ground
+	# (wheels/legs/treads/hoverplates are completely visual and are all simulated the same way)
 	for ray in suspension_rays:
 		
 		if _apply_suspension(ray):
 			grounded = true
 	
+	# control
 	if grounded:
 		
 		var up      :=  global_basis.y
@@ -35,17 +39,13 @@ func _process(delta: float) -> void:
 		var right   :=  global_basis.x
 		
 		# controls
-		if Input.is_action_pressed("forward"):
-			apply_force(forward * drive_force * delta, -up * 0.2)
+		var dir := Input.get_vector("right", "left", "backward", "forward")
 		
-		if Input.is_action_pressed("backward"):
-			apply_force(-forward * drive_force * delta, -up * 0.2)
+		apply_force(dir.y * forward * drive_force * delta, -up * 0.2)
 		
-		if Input.is_action_pressed("left"):
-			apply_torque(up * turn_torque * delta)
-			
-		if Input.is_action_pressed("right"):
-			apply_torque(up * -turn_torque * delta)
+		apply_torque(dir.x * up * turn_torque * delta)
+		
+		apply_force(dir.y * dir.x * right * drive_force * 0.2 * delta, -up * 0.2)
 		
 		# apply lateral drag
 		var lateral_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)

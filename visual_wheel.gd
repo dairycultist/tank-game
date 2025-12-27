@@ -20,3 +20,5 @@ func _process(_delta: float) -> void:
 	
 	if ray_result:
 		global_position = ray_result.position
+	else:
+		position = resting_pos

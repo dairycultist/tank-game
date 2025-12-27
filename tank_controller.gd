@@ -57,12 +57,14 @@ func _process(delta: float) -> void:
 	
 func _apply_suspension(ray: RayCast3D) -> bool:
 	
+	ray.global_rotation = Vector3.ZERO
+	
 	# the raycast represents suspension; if the ray hits something before the point
 	# of zero compression, it means the suspension is compressed ("grounded") and
 	# we should apply a relevant upward force at the position of the raycast's origin
 	if ray.is_colliding():
 		
-		var up := global_basis.y
+		var up := Vector3.UP
 		
 		var compression_distance := ((ray.target_position + ray.global_position) - ray.get_collision_point()).length()
 		var compression_fac := compression_distance / ray.target_position.length()

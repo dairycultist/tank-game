@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqsjlxqfniiny"]
+[gd_scene load_steps=13 format=3 uid="uid://cqsjlxqfniiny"]
 
 [ext_resource type="Texture2D" uid="uid://cqn5fyovn36mv" path="res://sand.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://cauop11ipcev3" path="res://tank_controller.gd" id="1_fj7yv"]
@@ -22,13 +22,19 @@ uv1_scale = Vector3(10, 10, 10)
 [sub_resource type="PlaneMesh" id="PlaneMesh_f3sb7"]
 size = Vector2(50, 50)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwbse"]
+size = Vector3(10, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pkg7o"]
+size = Vector3(10, 1, 1)
+
 [node name="World" type="Node3D"]
 
 [node name="Tank" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 7.2553415, 0)
 script = ExtResource("1_fj7yv")
 stiffness = 25.0
-dampening = 2.2
+dampening = 2.5
 
 [node name="tank" parent="Tank" instance=ExtResource("2_aqk2v")]
 
@@ -36,26 +42,38 @@ dampening = 2.2
 shape = SubResource("BoxShape3D_fj7yv")
 
 [node name="RayCast3D" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.5, 0, 0.7499998)
-target_position = Vector3(0, -0.41, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0.5, -0.012926102, 0.6999999)
+target_position = Vector3(0, -0.4, 0)
 
 [node name="RayCast3D2" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.5, 0, 0.7499998)
-target_position = Vector3(0, -0.41, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.5, -0.012926102, 0.6999999)
+target_position = Vector3(0, -0.4, 0)
 
 [node name="RayCast3D3" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.5, 0, -0.7499998)
-target_position = Vector3(0, -0.41, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0.5, -0.012926102, -0.6999999)
+target_position = Vector3(0, -0.4, 0)
 
 [node name="RayCast3D4" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.5, 0, -0.7499998)
-target_position = Vector3(0, -0.41, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.5, -0.012926102, -0.6999999)
+target_position = Vector3(0, -0.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Tank"]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9952666, 0.0971834, 0, -0.0971834, 0.9952666, 3.3643541e-09, 2.1798396, 3.675427)
 
 [node name="wheel" parent="Tank" instance=ExtResource("5_036b0")]
 transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.41047287, -0.43526745, 0.50626045)
+script = ExtResource("4_dwbse")
+
+[node name="wheel2" parent="Tank" instance=ExtResource("5_036b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0.41047287, -0.43526745, -0.35461342)
+script = ExtResource("4_dwbse")
+
+[node name="wheel3" parent="Tank" instance=ExtResource("5_036b0")]
+transform = Transform3D(-1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.41, -0.43526745, 0.50626045)
+script = ExtResource("4_dwbse")
+
+[node name="wheel4" parent="Tank" instance=ExtResource("5_036b0")]
+transform = Transform3D(-1, -1.509958e-07, 0, -1.509958e-07, 1, 0, 0, 0, -1, -0.41, -0.43526745, -0.35461342)
 script = ExtResource("4_dwbse")
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -66,6 +84,14 @@ shape = SubResource("WorldBoundaryShape3D_gv5m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 material_override = SubResource("StandardMaterial3D_fj7yv")
 mesh = SubResource("PlaneMesh_f3sb7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, -10)
+shape = SubResource("BoxShape3D_dwbse")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, -10)
+mesh = SubResource("BoxMesh_pkg7o")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.67204374, -0.43886122, 0.59645456, -0.62247723, 0.1014792, 0.776031, -0.40109763, -0.8928062, -0.20498249, 0, 0, 0)

@@ -2,6 +2,9 @@ extends RigidBody3D
 
 # basic movement is you're just a floating box; the wheels/legs/treads are completely visual
 
+@export_category("Control")
+@export var drag: float = 50.0
+
 @export_category("Suspension")
 ## How much the suspension forces oppose compression.
 @export var stiffness: float = 1500.0
@@ -14,12 +17,29 @@ func _ready() -> void:
 	
 	suspension_rays = find_children("*", "RayCast3D", false)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	
+	var grounded := false
 	
 	for ray in suspension_rays:
-		_apply_suspension(ray)
+		
+		if _apply_suspension(ray):
+			grounded = true
 	
-func _apply_suspension(ray: RayCast3D):
+	if grounded:
+		
+		# apply lateral drag
+		var forward := -global_basis.z
+		var right   :=  global_basis.x
+		
+		var lateral_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)
+		
+		apply_central_force(-lateral_velocity * drag * delta)
+		
+		# apply angular drag
+		apply_torque(global_basis.y * -angular_velocity.dot(global_basis.y) * drag * delta)
+	
+func _apply_suspension(ray: RayCast3D) -> bool:
 	
 	# the raycast represents suspension; if the ray hits something before the point
 	# of zero compression, it means the suspension is compressed ("grounded") and
@@ -42,3 +62,6 @@ func _apply_suspension(ray: RayCast3D):
 		
 		# apply force
 		apply_force(suspension_force * up, ray.position)
+		
+		return true
+	return false

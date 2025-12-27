@@ -28,10 +28,10 @@ size = Vector2(50, 50)
 [node name="World" type="Node3D"]
 
 [node name="Tank" type="RigidBody3D" parent="."]
-transform = Transform3D(0.9803229, 0.19705732, -0.011638335, -0.19740069, 0.97861755, -0.057797793, 0, 0.058957916, 0.99826044, 0, 7.2553415, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 7.2553415, 0)
 script = ExtResource("1_fj7yv")
-stiffness = 30.0
-dampening = 2.5
+stiffness = 25.0
+dampening = 2.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tank"]
 mesh = SubResource("BoxMesh_f3sb7")
@@ -44,16 +44,20 @@ mesh = SubResource("BoxMesh_fj7yv")
 shape = SubResource("BoxShape3D_fj7yv")
 
 [node name="RayCast3D" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.75)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.5, 0, 0.7499998)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="RayCast3D2" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.75)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.5, 0, 0.7499998)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="RayCast3D3" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.5, 0, -0.7499998)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="RayCast3D4" type="RayCast3D" parent="Tank"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -0.5, 0, -0.7499998)
+target_position = Vector3(0, -0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Tank"]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9952666, 0.0971834, 0, -0.0971834, 0.9952666, 3.3643541e-09, 2.1798396, 3.675427)

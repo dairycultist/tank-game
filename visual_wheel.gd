@@ -5,7 +5,7 @@ var resting_pos: Vector3
 func _ready() -> void:
 	resting_pos = position
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	
 	var tank := get_parent_node_3d()
 	
@@ -21,4 +21,4 @@ func _process(_delta: float) -> void:
 	if ray_result:
 		global_position = ray_result.position
 	else:
-		position = resting_pos
+		position = lerp(position, resting_pos, 3.0 * delta)

@@ -64,8 +64,6 @@ func _apply_suspension(ray: RayCast3D) -> bool:
 	# we should apply a relevant upward force at the position of the raycast's origin
 	if ray.is_colliding():
 		
-		var up := Vector3.UP
-		
 		var compression_distance := ((ray.target_position + ray.global_position) - ray.get_collision_point()).length()
 		var compression_fac := compression_distance / ray.target_position.length()
 		
@@ -74,12 +72,12 @@ func _apply_suspension(ray: RayCast3D) -> bool:
 		
 		# dampening opposes vertical velocity at the raycast's origin
 		var velocity_at_position := linear_velocity + angular_velocity.cross(ray.global_position - global_position)
-		var vertical_velocity_at_position = velocity_at_position.dot(up)
+		var vertical_velocity_at_position = velocity_at_position.dot(Vector3.UP)
 		
 		suspension_force -= vertical_velocity_at_position * dampening
 		
 		# apply force
-		apply_force(suspension_force * up, ray.global_position - global_position)
+		apply_force(suspension_force * Vector3.UP, ray.global_position - global_position)
 		
 		return true
 		

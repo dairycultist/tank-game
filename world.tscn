@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqsjlxqfniiny"]
+
+[ext_resource type="Texture2D" uid="uid://cqn5fyovn36mv" path="res://sand.png" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://cauop11ipcev3" path="res://tank_controller.gd" id="1_fj7yv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(1, 0.5, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
+size = Vector3(1, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
+size = Vector3(1, 0.5, 1.5)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_gv5m4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
+albedo_texture = ExtResource("1_f3sb7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f3sb7"]
+size = Vector2(10, 10)
+
+[node name="World" type="Node3D"]
+
+[node name="Tank" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.2553415, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_fj7yv")
+stiffness = 150.0
+dampening = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tank"]
+mesh = SubResource("BoxMesh_f3sb7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 0.85872746, 0.5124326, 0, -0.5124326, 0.85872746, 0, 0.14385307, -0.37629274)
+mesh = SubResource("BoxMesh_fj7yv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tank"]
+shape = SubResource("BoxShape3D_fj7yv")
+
+[node name="RayCast3D" type="RayCast3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.75)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_gv5m4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_fj7yv")
+mesh = SubResource("PlaneMesh_f3sb7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7071068, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071068, 3, 2, 3)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.67204374, -0.43886122, 0.59645456, -0.62247723, 0.1014792, 0.776031, -0.40109763, -0.8928062, -0.20498249, 0, 0, 0)

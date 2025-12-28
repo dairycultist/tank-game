@@ -4,7 +4,10 @@ extends RigidBody3D
 # towards camera direction
 
 @export_category("Control")
+## How much drag is applied when grounded (regardless of driving).
 @export var drag: float = 50.0
+## How much the tank resists slipping side-to-side (wheels and treads).
+@export var lateral_drag: float = 0.0
 @export var drive_force: float = 400.0
 @export var turn_torque: float = 100.0
 
@@ -45,10 +48,13 @@ func _process(delta: float) -> void:
 		
 		apply_torque(dir.x * up * turn_torque * delta)
 		
-		# apply lateral drag
-		var lateral_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)
+		# apply planar drag
+		var planar_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)
 		
-		apply_central_force(-lateral_velocity * drag * delta)
+		apply_central_force(-planar_velocity * drag * delta)
+		
+		# apply lateral drag
+		apply_central_force(right * -linear_velocity.dot(right) * lateral_drag * delta)
 		
 		# apply angular drag
 		apply_torque(up * -angular_velocity.dot(up) * drag * delta)

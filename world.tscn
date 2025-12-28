@@ -37,8 +37,9 @@ data = PackedVector3Array(-3, 1.9, -1.9, -2.9577, 1.9576999, -1.9576999, -2.9707
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 7.2553415, 0)
 physics_material_override = SubResource("PhysicsMaterial_pkg7o")
 script = ExtResource("1_fj7yv")
+lateral_drag = 80.0
 stiffness = 15.0
-dampening = 3.0
+dampening = 2.5
 
 [node name="CameraPivot" type="Node3D" parent="Tank"]
 

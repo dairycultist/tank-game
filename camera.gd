@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	camera_global_target_angle += tank.global_rotation.y - prev_tank_yaw
 	prev_tank_yaw = tank.global_rotation.y
 	
-	camera_yaw = lerp(camera_yaw, camera_global_target_angle, delta * 4.0)
+	camera_yaw = lerp_angle(camera_yaw, camera_global_target_angle, delta * 12.0)
 	
 	# ensure camera is always above the tank (even if tipped over) and
 	# (generally) facing where the tank is facing

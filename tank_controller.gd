@@ -45,8 +45,6 @@ func _process(delta: float) -> void:
 		
 		apply_torque(dir.x * up * turn_torque * delta)
 		
-		apply_force(dir.y * dir.x * right * drive_force * 0.2 * delta, -up * 0.2)
-		
 		# apply lateral drag
 		var lateral_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)
 		

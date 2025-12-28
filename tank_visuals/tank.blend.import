@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d0f5mi1v7sxoc"
-path="res://.godot/imported/wheel.blend-abc131f58370713861bd619a7678a3c8.scn"
+uid="uid://cujxvwb630h8s"
+path="res://.godot/imported/tank.blend-430718261c169ee83a9454518c590ff8.scn"
 
 [deps]
 
-source_file="res://wheel.blend"
-dest_files=["res://.godot/imported/wheel.blend-abc131f58370713861bd619a7678a3c8.scn"]
+source_file="res://tank_visuals/tank.blend"
+dest_files=["res://.godot/imported/tank.blend-430718261c169ee83a9454518c590ff8.scn"]
 
 [params]
 
@@ -37,7 +37,20 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"Frame": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://tank_visuals/frame.tres",
+"use_external/path": "uid://c5thqtk66bytq"
+},
+"Paint": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://tank_visuals/paint.tres",
+"use_external/path": "uid://deagguv7nbgrs"
+}
+}
+}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

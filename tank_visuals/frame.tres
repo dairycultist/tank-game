@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c5thqtk66bytq"]
+
+[ext_resource type="Shader" uid="uid://dc0rvmkthes0w" path="res://simple.gdshader" id="1_gdfxe"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gdfxe")
+shader_parameter/color = Color(0.646029, 0.646029, 0.646029, 1)
+shader_parameter/shine = 0.5

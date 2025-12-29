@@ -1,7 +1,5 @@
 extends RigidBody3D
 
-# TODO turret attempts to face towards camera direction
-
 @export_category("Camera")
 @export var mouse_sensitivity: float = 0.003
 
@@ -38,7 +36,8 @@ func _process(delta: float) -> void:
 	var grounded := false
 	
 	# apply "suspension" which allows the tank to float above the ground
-	# (wheels/legs/treads/hoverplates are completely visual and are all simulated the same way)
+	# (wheels/legs/treads/hoverplates are completely visual and are all
+	# simulated the same way)
 	for ray in suspension_rays:
 		
 		if _apply_suspension(ray):
@@ -70,20 +69,26 @@ func _process(delta: float) -> void:
 		apply_torque(up * -angular_velocity.dot(up) * drag * delta)
 	
 	# camera
-	camera_global_target_angle += global_rotation.y - prev_tank_yaw
-	prev_tank_yaw = global_rotation.y
-	
-	camera_yaw = lerp_angle(camera_yaw, camera_global_target_angle, delta * 12.0)
-	
-	# ensure camera is always above the tank (even if tipped over) and
-	# (generally) facing where the tank is facing
-	$CameraPivot.global_rotation = Vector3(camera_pitch, camera_yaw, 0)
-	
-	# speed fac
-	var speed_fac = pow(min(linear_velocity.length() * 0.05, 1.0), 0.8)
-	
-	# FOV (60 - 100)
-	$CameraPivot/Camera3D.fov = 60 + speed_fac * 40
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		
+		camera_global_target_angle += global_rotation.y - prev_tank_yaw
+		prev_tank_yaw = global_rotation.y
+		
+		camera_yaw = lerp_angle(camera_yaw, camera_global_target_angle, delta * 12.0)
+		
+		# ensure camera is always above the tank (even if tipped over) and
+		# (generally) facing where the tank is facing
+		$CameraPivot.global_rotation = Vector3(camera_pitch, camera_yaw, 0)
+		
+		# speed fac
+		var speed_fac = pow(min(linear_velocity.length() * 0.05, 1.0), 0.8)
+		
+		# FOV (60 - 100)
+		$CameraPivot/Camera3D.fov = 60 + speed_fac * 40
+		
+		# TODO turret attempts to face towards camera direction
+		var lerp_direction = sign(camera_global_target_angle - lerp_angle($Turret.rotation.y + rotation.y, camera_global_target_angle, 0.5))
+		$Turret.rotation.y += lerp_direction * 2.0 * delta
 	
 func _apply_suspension(ray: RayCast3D) -> bool:
 	

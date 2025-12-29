@@ -58,7 +58,10 @@ func _process(delta: float) -> void:
 		
 		apply_force(dir.y * forward * drive_force * delta, -up * 0.2)
 		
-		apply_torque(dir.x * up * turn_torque * delta)
+		if dir.y < 0:
+			apply_torque(-dir.x * up * turn_torque * delta)
+		else:
+			apply_torque(dir.x * up * turn_torque * delta)
 		
 		# apply planar drag
 		var planar_velocity := forward * linear_velocity.dot(forward) + right * linear_velocity.dot(right)

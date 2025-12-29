@@ -31,9 +31,11 @@ func _process(delta: float) -> void:
 	# visual turning
 	var dir := Input.get_vector("right", "left", "backward", "forward")
 	
-	rotation.y = lerp_angle(rotation.y, base_yaw + PI / 8 * (-dir.x if steer_invert else dir.x), 4.0 * delta)
+	rotation.y = lerp_angle(rotation.y, base_yaw + PI / 8 * (-dir.x if steer_invert else dir.x) * abs(dir.y), 4.0 * delta)
 	
-	# visual driving
-	$Wheel.rotation.x += global_basis.z.dot(get_parent_node_3d().linear_velocity) * delta * 5.0
+	# visual driving (accounts for tank linear and angular velocities)
+	var velocity_at_wheel = get_parent_node_3d().linear_velocity + get_parent_node_3d().angular_velocity.cross(global_position - get_parent_node_3d().global_position)
+	
+	$Wheel.rotation.x += global_basis.z.dot(velocity_at_wheel) * delta * 5.0
 	
 	

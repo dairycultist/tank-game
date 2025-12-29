@@ -28,9 +28,12 @@ func _process(delta: float) -> void:
 	else:
 		position = lerp(position, resting_pos, 3.0 * delta)
 	
-	# visual
+	# visual turning
 	var dir := Input.get_vector("right", "left", "backward", "forward")
 	
 	rotation.y = lerp_angle(rotation.y, base_yaw + PI / 8 * (-dir.x if steer_invert else dir.x), 4.0 * delta)
+	
+	# visual driving
+	$Wheel.rotation.x += global_basis.z.dot(get_parent_node_3d().linear_velocity) * delta * 5.0
 	
 	

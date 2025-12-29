@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqsjlxqfniiny"]
+[gd_scene load_steps=19 format=3 uid="uid://cqsjlxqfniiny"]
 
 [ext_resource type="Texture2D" uid="uid://cqn5fyovn36mv" path="res://sand.png" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://cauop11ipcev3" path="res://tank_controller.gd" id="1_fj7yv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://deagguv7nbgrs" path="res://tank_visuals/paint.tres" id="3_ioo17"]
 [ext_resource type="Texture2D" uid="uid://d1h8din4f2guc" path="res://sand_normal.png" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://cg3e2mb2ac71w" path="res://visual_wheel.gd" id="4_dwbse"]
+[ext_resource type="Material" uid="uid://c5thqtk66bytq" path="res://tank_visuals/frame.tres" id="4_wse8f"]
 [ext_resource type="PackedScene" uid="uid://d0f5mi1v7sxoc" path="res://tank_visuals/wheel.blend" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://bqdw7y7agcnum" path="res://ramp.blend" id="7_pkg7o"]
 
@@ -15,6 +16,11 @@ friction = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_gbfbk"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ic0uy"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
 size = Vector3(1, 0.5, 1.5)
@@ -49,16 +55,25 @@ stiffness = 15.0
 transform = Transform3D(1, 0, 0, 0, 0.9952665, 0.09718339, 0, -0.097183384, 0.9952665, 3.3643541e-09, 1.6978588, 3.9158504)
 fov = 60.0
 
-[node name="Turret" type="Node3D" parent="Tank"]
+[node name="TurretPivot" type="Node3D" parent="Tank"]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.25, 0)
 
-[node name="barrel" parent="Tank/Turret" instance=ExtResource("3_gbfbk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24965858, -0.17585418)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Tank/Turret"]
+[node name="TempMesh" type="MeshInstance3D" parent="Tank/TurretPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0.19575977, 0.080259524)
 material_override = ExtResource("3_ioo17")
 mesh = SubResource("BoxMesh_gbfbk")
+
+[node name="BarrelPivot" type="Node3D" parent="Tank/TurretPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25640678, -0.13831128)
+
+[node name="TempMesh" type="MeshInstance3D" parent="Tank/TurretPivot/BarrelPivot"]
+transform = Transform3D(-4.371139e-08, -0.9999998, 0, 0.99999964, -4.371136e-08, 0, 0, 0, 0.99999946, 0, 0, 0)
+material_override = ExtResource("4_wse8f")
+mesh = SubResource("CylinderMesh_ic0uy")
+skeleton = NodePath("../..")
+
+[node name="barrel" parent="Tank/TurretPivot/BarrelPivot" instance=ExtResource("3_gbfbk")]
+transform = Transform3D(0.99999994, 0, 0, -3.552714e-15, 0.9999998, 0, 0, 0, 0.99999976, -1.5709656e-14, -0.0067481995, -0.044704005)
 
 [node name="tank" parent="Tank" instance=ExtResource("2_aqk2v")]
 

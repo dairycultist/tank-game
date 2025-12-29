@@ -1,5 +1,8 @@
 extends RigidBody3D
 
+@onready var CAMERA = $CameraPivot/Camera3D
+@onready var BARREL_PIVOT = $TurretPivot/BarrelPivot
+
 @export_category("Camera")
 @export var mouse_sensitivity: float = 0.003
 
@@ -84,22 +87,21 @@ func _process(delta: float) -> void:
 		var speed_fac = pow(min(linear_velocity.length() * 0.05, 1.0), 0.8)
 		
 		# FOV (60 - 100)
-		$CameraPivot/Camera3D.fov = 60 + speed_fac * 40
+		CAMERA.fov = 60 + speed_fac * 40
 		
 		# turret attempts to face towards camera direction
 		var lerp_direction = sign(camera_global_target_angle - lerp_angle($TurretPivot.rotation.y + rotation.y, camera_global_target_angle, 0.5))
 		$TurretPivot.rotation.y += lerp_direction * 2.0 * delta
 		
 		# barrel too
-		var barrel_pivot = $TurretPivot/BarrelPivot
-		var prev_pitch = barrel_pivot.rotation.x
-		barrel_pivot.look_at($CameraPivot/Camera3D.global_position - $CameraPivot/Camera3D.global_basis.z * 100.0)
+		var prev_pitch = BARREL_PIVOT.rotation.x
+		BARREL_PIVOT.look_at(CAMERA.global_position - CAMERA.global_basis.z * 100.0)
 		
-		lerp_direction = sign(barrel_pivot.rotation.x - lerp_angle(barrel_pivot.rotation.x, prev_pitch, 0.5))
+		lerp_direction = sign(BARREL_PIVOT.rotation.x - lerp_angle(BARREL_PIVOT.rotation.x, prev_pitch, 0.5))
 		
-		barrel_pivot.rotation.x = prev_pitch + lerp_direction * delta
-		barrel_pivot.rotation.y = 0.0
-		barrel_pivot.rotation.z = 0.0
+		BARREL_PIVOT.rotation.x = prev_pitch + lerp_direction * delta
+		BARREL_PIVOT.rotation.y = 0.0
+		BARREL_PIVOT.rotation.z = 0.0
 	
 func _apply_suspension(ray: RayCast3D) -> bool:
 	

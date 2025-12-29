@@ -100,14 +100,16 @@ target_position = Vector3(0, -0.35, 0)
 [node name="wheel" parent="Tank" instance=ExtResource("5_036b0")]
 transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0.41047287, -0.5716715, 0.5062604)
 script = ExtResource("4_dwbse")
+steer_invert = true
 
 [node name="wheel2" parent="Tank" instance=ExtResource("5_036b0")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, -0.99999994, 0.41047287, -0.5716715, -0.3546134)
 script = ExtResource("4_dwbse")
 
 [node name="wheel3" parent="Tank" instance=ExtResource("5_036b0")]
-transform = Transform3D(-1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, -0.41, -0.5716715, 0.5062604)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, 8.742278e-08, 0, 1, -0.41, -0.5716715, 0.5062604)
 script = ExtResource("4_dwbse")
+steer_invert = true
 
 [node name="wheel4" parent="Tank" instance=ExtResource("5_036b0")]
 transform = Transform3D(-1, -1.509958e-07, 0, -1.5099579e-07, 0.99999994, 0, 0, 0, -0.99999994, -0.41, -0.5716715, -0.3546134)

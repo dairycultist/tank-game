@@ -1,9 +1,14 @@
 extends Node3D
 
+@export var steer_invert: bool = false
+
 var resting_pos: Vector3
+
+var base_yaw: float
 
 func _ready() -> void:
 	resting_pos = position
+	base_yaw = rotation.y
 
 func _process(delta: float) -> void:
 	
@@ -22,3 +27,10 @@ func _process(delta: float) -> void:
 		global_position = ray_result.position
 	else:
 		position = lerp(position, resting_pos, 3.0 * delta)
+	
+	# visual
+	var dir := Input.get_vector("right", "left", "backward", "forward")
+	
+	rotation.y = lerp_angle(rotation.y, base_yaw + PI / 8 * (-dir.x if steer_invert else dir.x), 4.0 * delta)
+	
+	

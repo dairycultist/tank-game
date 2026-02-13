@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	var tank := get_parent_node_3d()
+	var tank := get_parent_node_3d().get_parent_node_3d()
 	
 	# raycast somewhere decently above the wheel's lowest contact position
 	var query = PhysicsRayQueryParameters3D.create(
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	rotation.y = lerp_angle(rotation.y, base_yaw + PI / 8 * (-dir.x if steer_invert else dir.x) * abs(dir.y), 4.0 * delta)
 	
 	# visual driving (accounts for tank linear and angular velocities)
-	var velocity_at_wheel = get_parent_node_3d().linear_velocity + get_parent_node_3d().angular_velocity.cross(global_position - get_parent_node_3d().global_position)
+	var velocity_at_wheel = tank.linear_velocity + tank.angular_velocity.cross(global_position - tank.global_position)
 	
 	$Wheel.rotation.x += global_basis.z.dot(velocity_at_wheel) * delta * 5.0
 	

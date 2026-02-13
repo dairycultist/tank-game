@@ -53,11 +53,12 @@ func _process(delta: float) -> void:
 		var forward := -global_basis.z
 		var right   :=  global_basis.x
 		
-		# controls
 		var dir := Input.get_vector("right", "left", "backward", "forward")
 		
+		# drive
 		apply_force(dir.y * forward * drive_force * delta, -up * 0.2)
 		
+		# steering
 		if dir.y < 0:
 			apply_torque(-dir.x * up * turn_torque * delta)
 		else:

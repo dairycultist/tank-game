@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cujxvwb630h8s"
-path="res://.godot/imported/tank.blend-430718261c169ee83a9454518c590ff8.scn"
+path="res://.godot/imported/tank.blend-daa2a6f10d47b73933420bf5d7a2f911.scn"
 
 [deps]
 
-source_file="res://tank_visuals/tank.blend"
-dest_files=["res://.godot/imported/tank.blend-430718261c169ee83a9454518c590ff8.scn"]
+source_file="res://tank/tank.blend"
+dest_files=["res://.godot/imported/tank.blend-daa2a6f10d47b73933420bf5d7a2f911.scn"]
 
 [params]
 
@@ -41,12 +41,12 @@ _subresources={
 "materials": {
 "Frame": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/frame.tres",
+"use_external/fallback_path": "res://tank/frame.tres",
 "use_external/path": "uid://c5thqtk66bytq"
 },
 "Paint": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/paint.tres",
+"use_external/fallback_path": "res://tank/paint.tres",
 "use_external/path": "uid://deagguv7nbgrs"
 }
 }

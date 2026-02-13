@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://caro2kkghoixo"]
+
+[ext_resource type="PackedScene" uid="uid://d0f5mi1v7sxoc" path="res://tank/wheel.blend" id="1_q4t2o"]
+[ext_resource type="Script" uid="uid://cg3e2mb2ac71w" path="res://tank/visual_motors/visual_wheel.gd" id="2_tobt4"]
+
+[node name="VisualWheels" type="Node3D"]
+
+[node name="Wheel_BackRight" parent="." instance=ExtResource("1_q4t2o")]
+transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 0.99999964, 0.41047287, -0.5716715, 0.50626034)
+script = ExtResource("2_tobt4")
+steer_invert = true
+
+[node name="Wheel_FrontRight" parent="." instance=ExtResource("1_q4t2o")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, -0.99999994, 0.41047287, -0.5716715, -0.35461336)
+script = ExtResource("2_tobt4")
+
+[node name="Wheel_BackLeft" parent="." instance=ExtResource("1_q4t2o")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 0.99999994, 0, 8.742277e-08, 0, 0.99999994, -0.41, -0.5716715, 0.50626034)
+script = ExtResource("2_tobt4")
+steer_invert = true
+
+[node name="Wheel_FrontLeft" parent="." instance=ExtResource("1_q4t2o")]
+transform = Transform3D(-1, -1.509958e-07, 0, -1.5099577e-07, 0.9999999, 0, 0, 0, -0.9999999, -0.41, -0.5716715, -0.35461336)
+script = ExtResource("2_tobt4")

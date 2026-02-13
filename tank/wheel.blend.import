@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d0f5mi1v7sxoc"
-path="res://.godot/imported/wheel.blend-750d446a2b890aad26dd91e8cef777aa.scn"
+path="res://.godot/imported/wheel.blend-0b92b499f1c1f38696f15907323643a2.scn"
 
 [deps]
 
-source_file="res://tank_visuals/wheel.blend"
-dest_files=["res://.godot/imported/wheel.blend-750d446a2b890aad26dd91e8cef777aa.scn"]
+source_file="res://tank/wheel.blend"
+dest_files=["res://.godot/imported/wheel.blend-0b92b499f1c1f38696f15907323643a2.scn"]
 
 [params]
 
@@ -41,17 +41,17 @@ _subresources={
 "materials": {
 "Frame": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/frame.tres",
+"use_external/fallback_path": "res://tank/frame.tres",
 "use_external/path": "uid://c5thqtk66bytq"
 },
 "Paint": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/paint.tres",
+"use_external/fallback_path": "res://tank/paint.tres",
 "use_external/path": "uid://deagguv7nbgrs"
 },
 "Wheel": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/wheel.tres",
+"use_external/fallback_path": "res://tank/wheel.tres",
 "use_external/path": "uid://dytnsgsgvjp76"
 }
 }

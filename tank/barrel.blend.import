@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bdp7wu6b10no7"
-path="res://.godot/imported/barrel.blend-45b9624a4a9b36db743216f80b8b7fb0.scn"
+path="res://.godot/imported/barrel.blend-52220e11f40cdbecc40162efe33cbd98.scn"
 
 [deps]
 
-source_file="res://tank_visuals/barrel.blend"
-dest_files=["res://.godot/imported/barrel.blend-45b9624a4a9b36db743216f80b8b7fb0.scn"]
+source_file="res://tank/barrel.blend"
+dest_files=["res://.godot/imported/barrel.blend-52220e11f40cdbecc40162efe33cbd98.scn"]
 
 [params]
 
@@ -41,7 +41,7 @@ _subresources={
 "materials": {
 "Metal": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://tank_visuals/frame.tres",
+"use_external/fallback_path": "res://tank/frame.tres",
 "use_external/path": "uid://c5thqtk66bytq"
 }
 }
